@@ -1,0 +1,64 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from scrapy.selector import Selector
+from csv import writer
+import time, logging, sys, os
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
+import pandas as pd
+from scrapy.selector import Selector
+
+
+logging.basicConfig(level=logging.INFO)
+DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
+
+if __name__ == "__main__":
+
+    options = Options()
+    # options.add_argument("--headless")
+    # options.add_argument(
+    #     f"user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"
+    # )
+    # options.add_argument("--window-size=1920,1080")
+    # options.add_argument("--ignore-certificate-errors")
+    # options.add_argument("--allow-running-insecure-content")
+
+    service = Service(DRIVER_EXECUTABLE_PATH)
+    driver = webdriver.Chrome(service=service, options=options)
+
+    driver.get(
+        "https://www.zillow.com/jacksonville-fl/with-pool/?searchQueryState=%7B%22pagination%22%3A%7B%7D%2C%22usersSearchTerm%22%3A%22Jacksonville%2C%20FL%22%2C%22mapBounds%22%3A%7B%22west%22%3A-82.43945654003906%2C%22east%22%3A-80.93844945996094%2C%22south%22%3A29.859958036203615%2C%22north%22%3A30.823497100921227%7D%2C%22regionSelection%22%3A%5B%7B%22regionId%22%3A25290%2C%22regionType%22%3A6%7D%5D%2C%22isMapVisible%22%3Atrue%2C%22filterState%22%3A%7B%22sort%22%3A%7B%22value%22%3A%22globalrelevanceex%22%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22pool%22%3A%7B%22value%22%3Atrue%7D%7D%2C%22isListVisible%22%3Atrue%7D"
+    )
+
+    time.sleep(10)
+
+    with open("house.csv", "a") as csv_file:
+        csv_writer = writer(csv_file)
+        csv_writer.writerow(("house_url", "address", "features", "price", "status"))
+        response = Selector(text=driver.page_source.encode("utf8"))
+
+        houses = response.xpath(
+            "//ul[@class='photo-cards photo-cards_wow photo-cards_short photo-cards_extra-attribution']/li"
+        )
+
+        for house in houses:
+            house_url = house.xpath(".//div[@class='list-card-info']/a/@href").get()
+            address = house.xpath(
+                ".//div[@class='list-card-info']/a/address/text()"
+            ).get()
+            price = house.xpath(".//div[@class='list-card-price']/text()").get()
+            features = " ".join(
+                house.xpath(".//ul[@class='list-card-details']/li//text()").getall()[
+                    :-1
+                ]
+            )
+            status = house.xpath(".//li[@class='list-card-statusText']/text()").get()
+
+            if status:
+                status = status.replace("-", "").strip()
+
+            csv_writer.writerow((house_url, address, features, price, status))
