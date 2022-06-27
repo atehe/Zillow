@@ -15,7 +15,7 @@ import undetected_chromedriver as uc
 
 
 logging.basicConfig(level=logging.INFO)
-DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
+DRIVER_EXECUTABLE_PATH = "./utils/chromedriver.exe"
 
 # if __name__ == "__main__":
 
@@ -40,7 +40,7 @@ options = Options()
 
 service = Service(DRIVER_EXECUTABLE_PATH)
 # driver = webdriver.Chrome(service=service, options=options)
-driver = uc.Chrome(version_main=100, options=options)
+driver = uc.Chrome(version_main=103, options=options)
 
 # driver.get(
 #     "https://www.zillow.com/jacksonville-fl/with-pool/?searchQueryState=%7B%22pagination%22%3A%7B%7D%2C%22usersSearchTerm%22%3A%22Jacksonville%2C%20FL%22%2C%22mapBounds%22%3A%7B%22west%22%3A-82.43945654003906%2C%22east%22%3A-80.93844945996094%2C%22south%22%3A29.859958036203615%2C%22north%22%3A30.823497100921227%7D%2C%22regionSelection%22%3A%5B%7B%22regionId%22%3A25290%2C%22regionType%22%3A6%7D%5D%2C%22isMapVisible%22%3Atrue%2C%22filterState%22%3A%7B%22sort%22%3A%7B%22value%22%3A%22globalrelevanceex%22%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22pool%22%3A%7B%22value%22%3Atrue%7D%7D%2C%22isListVisible%22%3Atrue%7D"
