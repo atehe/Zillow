@@ -54,27 +54,94 @@ driver.get("https://paopropertysearch.coj.net/Basic/Search.aspx")
 
 # 6613 CARTIER CIR, Jacksonville, FL
 
-street_number_input = driver.find_element(
-    by=By.XPATH, value='//input[contains(@id,"StreetNumber")]'
-)
-street_number_input.clear()
-street_number_input.send_keys("6613")
 
-street_name_input = driver.find_element(
-    by=By.XPATH, value='//input[contains(@id,"StreetName")]'
-)
-street_name_input.clear()
-street_name_input.send_keys("CARTIER")
-zip_code_input = driver.find_element(
-    by=By.XPATH, value='//input[contains(@id,"ZipCode")]'
-)
-zip_code_input.clear()
-zip_code_input.send_keys("32208")
+def fill_n_search(street_num="", street_name="", zip_code="", city="Jacksonville"):
+
+    street_number_input = driver.find_element(
+        by=By.XPATH, value='//input[contains(@id,"StreetNumber")]'
+    )
+    street_number_input.clear()
+    street_number_input.send_keys(street_num)
+
+    street_name_input = driver.find_element(
+        by=By.XPATH, value='//input[contains(@id,"StreetName")]'
+    )
+    street_name_input.clear()
+    street_name_input.send_keys(street_name)
+
+    city_drop_down = Select(
+        driver.find_element(by=By.XPATH, value='//select[contains(@id,"City")]')
+    )
+    city_drop_down.select_by_value(city)
+
+    zip_code_input = driver.find_element(
+        by=By.XPATH, value='//input[contains(@id,"ZipCode")]'
+    )
+    zip_code_input.clear()
+    zip_code_input.send_keys(zip_code)
+    zip_code_input.send_keys(Keys.RETURN)
 
 
-city_drop_down = Select(
-    driver.find_element(by=By.XPATH, value='//select[contains(@id,"City")]')
-)
-city_drop_down.select_by_value("Jacksonville")
+# fill_n_search(6613, "CARTIER", 32208)
 
-zip_code_input.send_keys(Keys.RETURN)
+
+def parse_result(driver, output_csv):
+    with open(output_csv, "a") as csv_file:
+        csv_writer = writer(csv_file)
+        headers = (
+            "RE #",
+            "Property URL",
+            "Name",
+            "Street Number",
+            "Street Name",
+            "Type",
+            "Direction",
+            "Unit",
+            "City",
+            "Zip",
+        )
+
+    page_response = Selector(text=driver.page_source.encode("utf8"))
+    table_rows = page_response.xpath('//table[contains(@id,"gridResults")]//tr')
+
+    for row in table_rows:
+        RE_number = row.xpath("./td[1]//text()").get()
+        RE_url = row.xpath("./td[1]//a/@href").get()
+        if RE_url:
+            RE_url = f"https://paopropertysearch.coj.net/{RE_url}"
+        name = row.xpath("./td[2]//text()").get()
+        street_num = row.xpath("./td[3]//text()").get()
+        street_name = row.xpath("./td[4]//text()").get()
+        type = row.xpath("./td[5]//text()").get()
+        direction = row.xpath("./td[6]//text()").get()
+        unit = row.xpath("./td[7]//text()").get()
+        city = row.xpath("./td[8]//text()").get()
+        zip = row.xpath("./td[9]//text()").get()
+
+        csv_writer.writerow(
+            (
+                RE_number,
+                RE_url,
+                name,
+                street_num,
+                street_name,
+                type,
+                direction,
+                unity,
+                city,
+                zip,
+            )
+        )
+
+
+def get_property_info(
+    output_csv, street_num="", street_name="", zip_code="", city="Jacksonville"
+):
+    service = Service(DRIVER_EXECUTABLE_PATH)
+    driver = webdriver.Chrome(service=service, options=options)
+
+    fill_n_search(street_num, street_name, zip_code)
+    parse_result(driver, output_csv)
+
+
+get_property_info("play.csv", "", "CARTIER", 32208)
