@@ -22,7 +22,7 @@ from datetime import date
 DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
 
 
-def generate_api_url(page_num, on_sale=True):
+def generate_api_url(page_num, on_sale):
     # API parameter <searchQueryState>
     if on_sale:
         filter_state = {
@@ -73,10 +73,11 @@ def generate_api_url(page_num, on_sale=True):
     return api_url
 
 
-def parse_api(api_json):
+def parse_api(api_json, on_sale):
     search_result = api_json.get("cat1", {}).get("searchResults", {})
 
     listings = search_result.get("listResults", [])
+    end = False
 
     parsed_data = []
     for listing in listings:
@@ -84,16 +85,32 @@ def parse_api(api_json):
         zip_code = listing.get("addressZipcode")
         city = listing.get("addressCity")
         state = listing.get("addressState")
+
+        if not on_sale:
+            date_data = (
+                listing.get("variableData", {})
+                .get("text", "")
+                .replace("Sold", "")
+                .strip()
+            )
+
+            month = date_data.split("/")[0]
+            if int(month) == date.today().month - 2:
+                end = True
+
         parsed_data.append(",".join((street_address, zip_code, city, state)))
-    return parsed_data
+
+    return parsed_data, end
 
 
 def scrape_zillow(on_sale=True):
     month = date.today().month
     if on_sale:
         filename = f"zillow_onsale_{month}.csv"
+        page_limit = 8
     else:
         filename = f"zillow_sold_{month}.csv"
+        page_limit = 20
 
     # create browser
     service = Service(DRIVER_EXECUTABLE_PATH)
@@ -103,13 +120,13 @@ def scrape_zillow(on_sale=True):
 
     page = 1
     while True:
-        if page == 6:
-            break
         print(f">>> Parsing page {page}")
         api_url = generate_api_url(page, on_sale)
-        driver.get(api_url)
+        driver.get(
+            api_url,
+        )
         api_response = json.loads(driver.find_element(by=By.XPATH, value="//body").text)
-        parsed_data = parse_api(api_response)
+        parsed_data, end = parse_api(api_response, on_sale)
 
         # write data to csv
         write_headers = not os.path.exists(filename)
@@ -121,6 +138,9 @@ def scrape_zillow(on_sale=True):
             file.write("\n".join(parsed_data))
             file.write("\n")
 
+        if page >= page_limit or end:
+            break
+
         page += 1
 
     df = pd.read_csv(filename)
@@ -131,5 +151,5 @@ def scrape_zillow(on_sale=True):
 
 
 if __name__ == "__main__":
-
+    scrape_zillow(False)
     scrape_zillow()
