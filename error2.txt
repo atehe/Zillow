@@ -1,0 +1,904 @@
+2234 river road 32207
+3229 percy 32218
+1734 shore view 32218
+10254 shore view 32218
+1453 lindseys crossing 32218
+11038 fort george 32226
+13994 red rock lake 32226
+13402 teddington lane 32226
+14351 boney 32226
+13285 grover 32226
+400 bay suite 32202
+400 bay suite  32202
+400 bay suite 32202
+400 bay suite  32202
+400 bay suite 32202
+400 bay suite  32202
+400 bay suite 32202
+400 bay suite  32202
+3526 jones 32220
+3718 saint johns 32205
+5523 woodcrest 32205
+3032 saint johns 32205
+2970 saint johns  32205
+3885 saint johns 32205
+2970 saint johns 32205
+2970 saint johns 32205
+2970 saint johns 32205
+2970 saint johns 32205
+1154 hickory cove 32221
+1186 battle cove 32221
+10198 meadow pointe 32221
+10325 meadow pointe 32221
+10174 meadow pointe 32221
+10162 meadow pointe 32221
+1057 morningroll 322219618 ford 32009
+32043 white tail 32009
+32074 white tail 32009
+9345 ford 32009
+12053 old north 32009
+32045 white tail 32009
+7649 motes 32009
+9477 ford 32009
+11883 county road 32009
+9771 county road 32009
+32215 settlers ridge 32009
+6142 saddlebend 32009
+9114 ford 32009
+949 limousine 32009
+9096 ford 32009
+855 farrier 32009
+906 county 32234
+6394 autumn 32234
+945 county road 32234
+229 magnolia 32234
+6004 searchwood 32234
+358 palm 32234
+358 palm 32234
+544 kelly 32234
+145 orange 32234
+7810 us highway  32234
+920 treeand 32234
+520 fairgreen 32234
+5829 long branch cemetery 32234
+5151 playpen 7-15 32210
+7917 lemans 32210
+1807 mount vernon 32210
+3680 kirkpatrick 6-16 32210
+3711 kirkpatrick 16-10 32210
+8184 fort 32244
+6162 du clay forest 32244
+6108 du clay 32244
+8550 argyle business loop  32244
+8550 argyle business loop 32244
+8550 argyle business loop  32244
+8575 alderwood 32244
+8550 argyle business loop  32244
+50 seminole landing 32233
+1747 maritime 32233
+2321 seminole 32233
+1830 sevilla 32233
+1816 selva grande 32233
+357 11th 32233
+357 11th 32233
+1911 sea oats 32233
+2101 fairway villas 32233
+2299 fairway villas 32233
+1639 sea oats 32233
+2323 barefoot trce 32233
+65 coral 32233
+1472 laurel 32233
+1751 beach 32233
+770 paradise 32233
+390 garden 32233
+1470 ocean 32233
+1732 sea oats 32233
+280 15th 32233
+1875 beachside 32233
+604 timber bridge 32233
+320 11th 32233
+1194 linkside 32233
+1792 sea oats 32233
+1500 selva marina 32233
+2009 selva madera 32233
+1945 seminole 32233
+1296 beach 32233
+1895 hickory 32233
+2050 beach 32233
+1889 beach 32233
+2027 vela norte 32233
+344 9th 32233
+10 10th 32233
+421 sargo 32233
+10 10th 32233
+50 forrestal 32233
+589 clipper ship 32233
+370 plaza 32233
+620 orchid 32233
+320 1st 32233
+860 sailfishive 32233
+990 camelia 32233
+877 east coast 32233
+1251 gladiola 32233
+477 helmsman 32233
+761 paradise 32233
+460 sailfish 32233
+571 camelia 32233
+750 sailfish 32233
+562  nautical 32233
+781  paradise 32233
+2252  oceanwalk 32233
+1073 eocks 32233
+1770  maritime 32233
+1735  maritime 32233
+1660 linkside 32233
+619  selva lakes 32233
+1820  sevilla 32233
+39  forrestal 32233
+22  saratoga 32233
+96 ocean 32233
+698 beach 32233
+202 pine 32233
+171  coast 32233
+211  belvedere 32233
+500  clipper ship 32233
+1570 park 32233
+447  selva lakes 32233
+1607  atlantic beach 32233
+1435 linkside 32233
+1612 atlantic beach 32233
+475 selva lakes 32233
+365 sailfish 32233
+1175 seminole 32233
+377 12th 32233
+358 11th 32233
+396 11th 32233
+370 10th 32233
+358 5th 32233
+1565 park 32233
+1215 selva marina 32233
+341 8th 32233
+335 9th 32233
+395 12th 32233
+1225 selva marina 32233
+331 7th 32233
+1241 ocean 32233
+320 beach 32233
+880 beach 32233
+559 ocean 32233
+1355 ocean 32233
+1270 east coast 32233
+831 beach 32233
+901 ocean 32233
+1610 coquina 32233
+1616 beach 32233
+1748 ocean grove 32233
+1717 selva marina 32233
+1798 sea oats 32233
+1837 ocean grove 32233
+1908 oak 32233
+2041 beach 32233
+2093 beach 32233
+1950 mipaula 32233
+1890 beach 32233
+83 garden 32233
+1738 park terrace west 32233
+1971 mipaula 32233
+2323 seminole 32233
+2375 seminole 32233
+310  oceanforest 32233
+1777  beach 32233
+1840 live 32233
+334  19th 32233
+1955 brista de 32233
+285  oceanforest 32233
+70  beach cottage  32233
+70  beach cottage 32233
+2233  seminole 32233
+2248  oceanforest 32233
+97  kimberly 32233
+20 street 32233
+2102 beach 32233
+2233 seminole 32233
+1810 sevilla 32233
+1697 atlantic beach 32233
+1709 atlantic beach 32233
+1820 sevilla 32233
+1830 sevilla 32233
+1830 sevilla 32233
+1831 selva marina 32233
+1722 sea oats highland glen 32224
+11221 stanleyeamer 32246
+4511 reed bark 32246
+4503 reed bark 32246
+2360 saint johns bluff 32246
+12028 bluear 32246
+2141 saint martins 32246
+2025 saint martins 32246
+2291 fallen tree 32246
+2039 bent pine 32246
+4156 leeward point 32225
+11803 francisake 32225
+11415 woodsong loop 32225
+4455 woodsong loop 32225
+11705 francisake 32225
+11743 fort caroline 32225
+11414 woodsong loop 32225
+12231 one springmoor 32225
+9009 fort caroline 32225
+2236 broadwater 32225
+10528 lake view 32225
+1232 saint johns bluff 32225
+355 monument 10d1 32225
+355 monument 17e1 32225
+355 monument 21e2 32225
+404 saint johns bluff 32225
+13021 yellowar 32224
+4741 yellowar 32224
+4559 blueream 32224
+12337 blueream 32224
+11221 stanleyeamer 32246
+4511 reed bark 32246
+4503 reed bark 32246
+2360 saint johns bluff 32246
+12028 bluear 32246
+2141 saint martins 32246
+2025 saint martins 32246
+2291 fallen tree 32246
+2039 bent pine 32246
+4156 leeward point 32225
+11803 francisake 32225
+11415 woodsong loop 32225
+4455 woodsong loop 32225
+11705 francisake 32225
+11743 fort caroline 32225
+11414 woodsong loop 32225
+12231 one springmoor 32225
+9009 fort caroline 32225
+2236 broadwater 32225
+10528 lake view 32225
+1232 saint johns bluff 32225
+355 monument 10d1 32225
+355 monument 17e1 32225
+355 monument 21e2 32225
+404 saint johns bluff 32225
+14254 mount pleasant 32225
+12451 mount pleasant woods 32225
+7201 arlington expy 32211
+1102 rio saint johns 32211
+8530 lonear 32211
+6005 briar forest 32277
+6030 briar forest 32277
+5731 saint isabel 32277
+3905 saint isabel 32277
+2805 merwyn 32207
+13834 pines 32207
+3404 saint nicholas 32207
+8196 trafalgar square 32217
+5417 skylark 32257
+10509 docksiderive 32257
+10926 mandarination 32257
+10942 mandarination 32257
+10855 mandarination 32257
+11019 mandarination 32257
+11035 mandarination 32257
+11043 mandarination 32257
+10934 mandarination 32257
+10385 big tree 32257
+10352 big tree 32257
+4644 millation 32257
+5353 sky lark 32257
+11986 oldfield pointe 32223
+12214 lashbrook 32223
+12232 lashbrook 32223
+12658 quarter horse 32223
+12843 riverory 32223
+12836 riverory 32223
+14225 riverory 32223
+2801 hiddenagecoach 32223
+13304 old augustine 32258
+6210 dalton springs 32258
+6134 cherry lake 32258
+6138 race track 32259
+4470 summerhaven 32258
+11575 summerhaven 32258
+8114 summer gate 32256
+11299 lenora 32256
+521 wingstone 32256
+36 hatter 32256
+63 carnauba 32256
+479 wingstone 32256
+7824 mt ranier 32256
+2314 eagle perch 32003
+2234 river road 32207
+1106 eutaw 32207
+13025 old augustine 32258
+14906 fishhawk preserve 32206
+1187 pecan cove 32221
+1470 ocean 32233
+1732 sea oats 32233
+280 15th 32233
+1875 beachside 32233
+604 timber bridge 32233
+320 11th 32233
+1194 linkside 32233
+1792 sea oats 32233
+1500 selva marina 32233
+2009 selva madera 32233
+1945 seminole 32233
+1296 beach 32233
+1895 hickory 32233
+2050 beach 32233
+1889 beach 32233
+2027 vela norte 32233
+344 9th 32233
+10 10th 32233
+421 sargo 32233
+10 10th 32233
+50 forrestal 32233
+589 clipper ship 32233
+370 plaza 32233
+620 orchid 32233
+320 1st 32233
+860 sailfishive 32233
+990 camelia 32233
+877 east coast 32233
+1251 gladiola 32233
+477 helmsman 32233
+761 paradise 32233
+460 sailfish 32233
+571 camelia 32233
+750 sailfish 32233
+562 nautical 32233
+781 paradise 32233
+2252 oceanwalk 32233
+1073 stocks 32233
+1770 maritime 32233
+1735 maritime 32233
+1660 linkside 32233
+619 selva lakes 32233
+1820 sevilla 32233
+39 forrestal 32233
+22 saratoga 32233
+96 ocean 32233
+698 beach 32233
+202 pine 32233
+171 coast 32233
+211 belvedere 32233
+500 clipper ship 32233
+1570 park 32233
+447 selva lakes 32233
+1607 atlantic beach 32233
+1435 linkside 32233
+1612 atlantic beach 32233
+475 selva lakes 32233
+365 sailfish 32233
+1175 seminole 32233
+377 12th 32233
+358 11th 32233
+396 11th 32233
+370 10th 32233
+358 5th 32233
+1565 park 32233
+1215 selva marina 32233
+341 8th 32233
+335 9th 32233
+395 12th 32233
+1225 selva marina 32233
+331 7th 32233
+1241 ocean 32233
+320 beach 32233
+880 beach 32233
+559 ocean 32233
+1355 ocean 32233
+1270 east coast 32233
+831 beach 32233
+901 ocean 32233
+1610 coquina 32233
+1616 beach 32233
+1748 ocean grove 32233
+1717 selva marina 32233
+1798 sea oats 32233
+1837 ocean grove 32233
+1908 oak 32233
+2041 beach 32233
+2093 beach 32233
+1950 mipaula 32233
+1890 beach 32233
+83 garden 32233
+1738 park terrace west 32233
+1971 mipaula 32233
+2323 seminole 32233
+2375 seminole 32233
+310 oceanforest 32233
+1777 beach 32233
+1840 live 32233
+334 19th 32233
+1955 brista 32233
+285 oceanforest 32233
+70 beach cottage 32233
+70 beach cottage 32233
+2233 seminole 32233
+2248 oceanforest 32233
+97 kimberly 32233
+20 street 32233
+2102 beach 32233
+2233 seminole 32233
+1810 sevilla 32233
+1697 atlantic beach 32233
+1709 atlantic beach 32233
+1820 sevilla 32233
+1830 sevilla 32233
+1830 sevilla 32233
+1831 selva marina 32233
+1722 sea oats 32233
+501 penman 32266
+201 driftwood 32266
+1840 twelve oaks 32266
+541 mccollum 32266
+1832 pelican 32266
+1804 twelve oaks 32266
+1330 trailwood 32266
+219 lora 32266
+301 penman 32266
+309 driftwood 32266
+1408 forest 32266
+719 mccollum 32266
+1866 seagate 32266
+2000 penman 32266
+1661 windward 32266
+560 myra 32266
+2010 rosewood 32266
+1300 kings 32266
+1419 neptune grove 32266
+406 lora 32266
+607 valley forge 32266
+1408 neptune grove 32266
+1404 neptune grove 32266
+205 south 32266
+207 walnut 32266
+903 valley forge 32266
+2146 acacia 32266
+617 bay 32266
+1407 forest marsh 32266
+1541 emma 32266
+1440 spindrift 32266
+1653 windward 32266
+1554 emma 32266
+2009 sandpiper point 32266
+1558 emma 32266
+530 goldenrod 32266
+1023 neptune 32266
+203 lora 32266
+1960 penman 32266
+220 magnolia 32266
+1546 emma 32266
+1500 big tree 32266
+632 magnolia 32266
+1550 emma 32266
+1020 cedar 32266
+612 mccollum 32266
+1930 tara 32266
+611 bowles 32266
+1865 nightfall 32266
+1340 trailwood 32266
+733 camellia terrace 32266
+409 sanibel 32266
+2000 cherokee 32266
+2004 marye brant loop 32266
+1909 secluded woods 32266
+1110 hamlet 32266
+1836 hamlet 32266
+1153 kings 32266
+1410 kings 32266
+1512 spindrift 32266
+1327 trailwood 32266
+317 sunrise 32266
+416 driftwood 32266
+1065 kings 32266
+805 cherry 32266
+2111 bay 32266
+1505 spindrift 32266
+1601 forest 32266
+1708 hamlet 32266
+1417 neptune grove 32266
+536 mccollum 32266
+546 south 32266
+617 valley forge 32266
+500 ocean front 32266
+121 myra 32266
+213 hopkins 32266
+102 north 32266
+324 myrtle 32266
+1714 indian woods 32266
+1872 seagate 32266
+1960 tara 32266
+1217 forest oaks 32266
+1137 hamlet 32266
+1821 kings 32266
+2007 marye brant loop 32266
+100 lora 32266
+841 penman 32266
+634 bay 32266
+228 myra 32266
+565 oleander 32266
+3518 ocean 32250
+1950 pullian 32250
+1121 11th 32250
+208 35th 32250
+3502 isabella 32250
+1701 6th 32250
+39 victory 32250
+4352 ponte vedra 32250
+194 st george 32250
+1800 the greens 32250
+123 29th 32250
+10 11th 32250
+413 1st 32250
+1771 oakbreeze 32250
+1009 9th 32250
+230 40th 32250
+937 16th 32250
+225 tallwood 32250
+305 19th 32250
+1649 ocean pond 32250
+4110 ponte vedra 32250
+2329 costa verde 32250
+2540 st johns 32250
+3928 palm 32250
+408 lower 36th 32250
+3114 sanctuary 32250
+1505 1st 32250
+1201 1st 32250
+2691 isabella 32250
+3928 palm 32250
+714 14th 32250
+3939 palm 32250
+4300 beach 32250
+932 1st 32250
+31 norberta 32250
+605 15th 32250
+3567 trident 32250
+3324 pintail 32250
+4082 gulfstream 32250
+1445 eastwind 32250
+950 ruth 32250
+55 quail 32250
+1655 the greens 32250
+1188 ruth 32250
+1031 1st 32250
+2200 ocean 32250
+108 laguna villas 32250
+1301 1st 32250
+1031 1st penthouse 32250
+1701 the greens 32250
+4116 ponte vedra 32250
+1601 ocean 32250
+1800 the greens 32250
+4408 royal tern 32250
+1800 the greens 32250
+1520 republic 32250
+4448 royal tern 32250
+2509 saint johns 32250
+3556 heron 32250
+2615 america 32250
+1101 seaside 32250
+2702 liberty 32250
+1701 the greens 32250
+1655 the greens 32250
+1404 osceola 32250
+1440 republic 32250
+1800 the greens 32250
+3322 zephyr 32250
+3607 sanctuary 32250
+3322 zephyr 32250
+3916 poinciana 32250
+1809 royal fern 32250
+1655 the greens 32250
+3963 america 32250
+1800 the greens 32250
+1800 the greens 32250
+3177 horn 32250
+3081 st johns 32250
+1800 the greens 32250
+2743 america 32250
+1800 the greens 32250
+3116 pullian 32250
+4300 beach 32250
+3614 paradise 32250
+3718 royal palm 32250
+3565 bay island 32250
+2900 antigua 32250
+2906 abaco 32250
+2701 isabella 32250
+2609 madrid 32250
+2601 madrid 32250
+212 38th 32250
+140 30th 32250
+131 32nd 32250
+3547 pintail 32250
+3437 ocean 32250
+3564 heron 32250
+3591 heron 32250
+3309 america 32250
+3471 snowy egret 32250
+3906 palm 32250
+3906 palm 32250
+3842 tropical 32250
+3845 grande 32250
+4300 beach 32250
+3322 1st 32250
+122 36th 32250
+4096 ponte vedra 32250
+63 37th 32250
+4115 avalon 32250
+3516 1st 32250
+4032 ponte vedra 32250
+3857 ponte vedra 32250
+129 36th 32250
+4030 duval 32250
+53 37th 32250
+3804 duval 32250
+4015 duval 32250
+124 mills 32250
+3929 duval 32250
+4352 ponte vedra 32250
+4230 duval 32250
+216 33rd 32250
+414 33rd 32250
+3108 ocean 32250
+3108 ocean 32250
+130 32nd 32250
+39 33rd 32250
+23 30th 32250
+2902 2nd 32250
+3528 bay island 32250
+2736 abaco 32250
+648 bonaire 32250
+2700 1st 32250
+728 bonaire 32250
+200 laguna villas 32250
+2400 1st 32250
+200 laguna villas 32250
+204 laguna villas 32250
+2317 costa verde 32250
+104 laguna villas 32250
+2319 costa verde 32250
+204 laguna villas 32250
+103 25th 32250
+108 laguna villas 32250
+2400 1st 32250
+33 sandra 32250
+11 burling 32250
+202 laguna villas 32250
+2200 ocean 32250
+2100 ocean 32250
+2100 ocean 32250
+2100 ocean 32250
+2100 ocean 32250
+2200 ocean 32250
+2100 ocean penthouse 32250
+200 laguna villas 32250
+108 laguna villas 32250
+714 15th 32250
+109 25th 32250
+200 laguna villas 32250
+2400 1st 32250
+2315 costa verde 32250
+108 laguna villas 32250
+1601 ocean 32250
+1601 ocean 32250
+1551 1st 32250
+1601 ocean 32250
+1601 ocean 32250
+1601 ocean 32250
+1601 ocean 32250
+1601 ocean 32250
+1601 ocean 32250
+1601 ocean 32250
+1601 ocean 32250
+1551 1st 32250
+1551 1st 32250
+1601 ocean 32250
+1601 ocean 32250
+1551 1st 32250
+1601 ocean 32250
+1712 5th 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+1221 1st 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+1301 1st 32250
+622 10th 32250
+1221 1st 32250
+1301 1st 32250
+619 11th 32250
+1301 1st 32250
+1221 1st 32250
+463 11th 32250
+1031 1st penthouse 32250
+1031 1st 32250
+1031 1st 32250
+1032 1st 32250
+1031 1st 32250
+1031 1st 32250
+1031 1st 32250
+1031 1st 32250
+506 9th 32250
+917 1st 32250
+917 1st 32250
+917 1st 32250
+917 1st 32250
+917 1st 32250
+811 1st 32250
+455 lower 32250
+1031 1st 32250
+917 1st 32250
+1031 1st 32250
+731 1st 32250
+440 7th 32250
+731 1st 32250
+515 7th 32250
+601 1st 32250
+601 1st 32250
+112 5th 32250
+955 13th 32250
+50 3rd 32250
+413 1st 32250
+736 5th 32250
+1323 6th 32250
+525 3rd 32250
+818 6th 32250
+807 penman 32250
+902 5th 32250
+19 fairway 32250
+28 hopson 32250
+217 tallwood 32250
+30 hopson 32250
+41 tallwood 32250
+49 tallwood 32250
+26 tallwood 32250
+45 tallwood 32250
+2002 waterway island 32250
+2444 oak forest 32250
+18 hopson 32250
+1005 24th 32250
+901 23rd 32250
+1120 20th 32250
+1821 azalea 32250
+1109 23rd 32250
+2357 oak forest 32250
+2329 oak forest 32250
+675 19th 32250
+1111 20th 32250
+5 oakwood 32250
+1655 tanglewood 32250
+29 oakwood 32250
+1601 bentin 32250
+39 tallwood 32250
+49 oakwood 32250
+83 cilewood 32250
+27 oakwood 32250
+2027 lakeside 32250
+2602 lois 32250
+925 16th 32250
+2654 lois 32250
+1150 16th 32250
+1602 arden 32250
+1801 kings 32250
+1903 oak grove 32250
+22 san pablo 32250
+1819 oak grove 32250
+514 palm tree 32250
+527 holly 32250
+708 palm tree 32250
+1345 4th 32250
+1906 grove 32250
+1820 kings 32250
+2091 lois 32250
+1207 arden 32250
+1501 arden 32250
+1815 kings 32250
+1203 arden 32250
+1110 18th 32250
+2010 oak grove 32250
+1103 12th 32250
+1023 16th 32250
+816 16th 32250
+803 13th 32250
+1116 10th 32250
+1209 8th 32250
+427 17th 32250
+605 12th 32250
+525 16th 32250
+535 16th 32250
+1008 7th 32250
+615 16th 32250
+606 17th 32250
+1304 7th 32250
+608 11th 32250
+418 17th 32250
+524 barbara 32250
+502 14th 32250
+222 14th 32250
+917 11th 32250
+582 8th 32250
+1916 1st 32250
+1331 1st 32250
+1331 1st 32250
+1415 1st 32250
+1126 1st 32250
+932 1st 32250
+932 1st 32250
+1331 1st 32250
+1231 palm 32250
+827 11th 32250
+809 6th 32250
+915 3rd 32250
+1100 2nd 32250
+1124 6th 32250
+921 11th 32250
+721 11th 32250
+525 3rd 32250
+932 1st 32250
+902 8th 32250
+903 3rd 32250
+614 6th 32250
+1653 marsh inlet 32250
+926 5th 32250
+432 10th 32250
+910 3rd 32250
+705 palm tree 32250
+810 9th 32250
+1520 3rd 32250
+1525 marshside 32250
+275 1st 32250
+1325 plantation oaks 32250
+413 1st 32250
+1701 seabreeze 32250
+3 fairway 32250
+1010 seabreeze 32250
+49 quail 32250
+413 1st 32250
+731 1st 32250
+731 1st 32250
+731 1st 32250
+731 1st 32250
+2480 beach 32250
+2480 beach 32250
+1748 evans 32250
+110 evans 32250
+1270 blue heron 32250
+1806 evans 32250
+107 rita 32250
+1837 oakbreeze 32250
+2011 williams 32250
+1825 williams 32250
+61 evans 32250
+1158 blue heron 32250
+1031 ruth 32250
+2251 riley 32250
+1102 seabreeze 32250
+921 14th 32250
+2605 america 32250
+1361 woodstork 32250
+1592 blue heron 32250
+1863 blue heron 32250
+2400 1st 32250
+201 25th 32250
+13856 herons landing way 11-1 32224
+13899 soft wind 32224
+3725 cross water 32224
+13769 west m davis 32224
+13650 west m davis 32224
+13021 yellowar 32224
+4741 yellowar 32224
+4559 blueream 32224
+12337 blueream 32224
