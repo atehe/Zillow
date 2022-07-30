@@ -6,22 +6,28 @@ from scrapy.selector import Selector
 from csv import writer
 import time, logging, sys, os
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
-import pandas as pd
-from scrapy.selector import Selector
-import undetected_chromedriver as uc
 from selenium.webdriver.common.action_chains import ActionChains
-from concurrent.futures import ThreadPoolExecutor
 from selenium.webdriver.common.keys import Keys
-
-
 from selenium.webdriver.support.ui import Select
+import pandas as pd
+from datetime import date
 
 
 logging.basicConfig(level=logging.INFO)
 DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
+
+ERROR_FILE = "error.csv"
+NO_RESULT_FILE = "no_result.csv"
+
+options = Options()
+# options.add_argument("--headless")
+# options.add_argument(
+#     f"user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"
+# )
+# options.add_argument("--window-size=1920,1080")
+# options.add_argument("--ignore-certificate-errors")
+# options.add_argument("--allow-running-insecure-content")
 
 
 def click(element, driver):
@@ -30,18 +36,8 @@ def click(element, driver):
         element.click()
     except:
         driver.execute_script("arguments[0].click();", element)
-    time.sleep(1.5)
+    time.sleep(0.5)
 
-
-options = Options()
-
-# options.add_argument("--headless")
-# options.add_argument(
-#     f"user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"
-# )
-# options.add_argument("--window-size=1920,1080")
-# options.add_argument("--ignore-certificate-errors")
-# options.add_argument("--allow-running-insecure-content")
 
 service = Service(DRIVER_EXECUTABLE_PATH)
 driver = webdriver.Chrome(service=service, options=options)
@@ -52,23 +48,27 @@ def fill_n_search(
 ):
     driver.get("https://paopropertysearch.coj.net/Basic/Search.aspx")
 
+    # fill street number
     street_number_input = driver.find_element(
         by=By.XPATH, value='//input[contains(@id,"StreetNumber")]'
     )
     street_number_input.clear()
     street_number_input.send_keys(street_num)
 
+    # fill street name
     street_name_input = driver.find_element(
         by=By.XPATH, value='//input[contains(@id,"StreetName")]'
     )
     street_name_input.clear()
     street_name_input.send_keys(street_name)
 
+    # select city
     city_drop_down = Select(
         driver.find_element(by=By.XPATH, value='//select[contains(@id,"City")]')
     )
     city_drop_down.select_by_value(city)
 
+    # increase search result per page
     result_down = Select(
         driver.find_element(
             by=By.XPATH, value='//select[contains(@id,"ResultsPerPage")]'
@@ -76,30 +76,46 @@ def fill_n_search(
     )
     result_down.select_by_value("10000")
 
+    # select street direction
     street_direction = Select(
         driver.find_element(by=By.XPATH, value='//select[contains(@id,"Prefix")]')
     )
-
     street_direction.select_by_value(direction.strip().upper())
+
+    # fill zip code
     zip_code_input = driver.find_element(
         by=By.XPATH, value='//input[contains(@id,"ZipCode")]'
     )
-
     zip_code_input.clear()
     zip_code_input.send_keys(zip_code)
+
+    # ENTER to search
     zip_code_input.send_keys(Keys.RETURN)
 
 
-def parse_result(
-    driver, output_csv, main_page, street_num, street_name, zip_code, error_file
-):
+def parse_result(output_csv, main_page, street_num, street_name, zip_code):
+    driver.switch_to.window(main_page)
+    page_response = Selector(text=driver.page_source.encode("utf8"))
 
+    no_result = page_response.xpath('//div[@id="noResults"]')
+    if no_result:
+        print("*** Found no Owner Information ***")
+        with open(NO_RESULT_FILE, "a") as no_result_file:
+            no_result_file.write(
+                ",".join((str(street_num), street_name, str(zip_code)))
+            )
+            no_result_file.write("\n")
+            return None
+
+    write_headers = not os.path.exists(output_csv)
     with open(output_csv, "a") as csv_file:
         csv_writer = writer(csv_file)
         headers = (
             "Real Estate Number",
             "Property URL",
             "Name",
+            "Last Name",
+            "First Name",
             "Street Number",
             "Street Name",
             "Type",
@@ -108,29 +124,23 @@ def parse_result(
             "City",
             "Zip",
         )
-
-        print("switching")
-        driver.switch_to.window(main_page)
-
-        page_response = Selector(text=driver.page_source.encode("utf8"))
+        if write_headers:
+            csv_writer.writerow(headers)
 
         table_rows = page_response.xpath('//table[contains(@id,"gridResults")]//tr')
         if len(table_rows) > 25:
-
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-        no_result = page_response.xpath('//div[@id="noResults"]')
-        if no_result:
-            print("Found no owner information")
-            error_file.write(" ".join((str(street_num), street_name, str(zip_code))))
-            error_file.write("\n")
-
-        for row in table_rows:
+        for row in table_rows[1:]:
             RE_number = row.xpath("./td[1]//text()").get()
             RE_url = row.xpath("./td[1]//a/@href").get()
             if RE_url:
                 RE_url = f"https://paopropertysearch.coj.net/{RE_url}"
             name = row.xpath("./td[2]//text()").get()
+            print(f"Found Owner {name}")
+            name_list = name.split()
+            first_name = " ".join(name_list[1:]) if len(name_list) >= 1 else None
+            last_name = name_list[0]
             street_num = row.xpath("./td[3]//text()").get()
             street_name = row.xpath("./td[4]//text()").get()
             type = row.xpath("./td[5]//text()").get()
@@ -144,6 +154,8 @@ def parse_result(
                     RE_number,
                     RE_url,
                     name,
+                    last_name,
+                    first_name,
                     street_num,
                     street_name,
                     type,
@@ -157,38 +169,38 @@ def parse_result(
 
 def get_property_info(
     output_csv,
-    error_file,
     street_num="",
     street_name="",
     zip_code="",
     direction="",
     city="Jacksonville",
 ):
-    # service = Service(DRIVER_EXECUTABLE_PATH)
-    # driver = webdriver.Chrome(service=service, options=options)
     main_page = driver.current_window_handle
-    print(main_page)
 
     fill_n_search(street_num, street_name, zip_code, direction)
-    parse_result(
-        driver, output_csv, main_page, street_num, street_name, zip_code, error_file
-    )
+    parse_result(output_csv, main_page, street_num, street_name, zip_code)
 
 
-import pandas as pd
+if __name__ == "__main__":
+    on_sale = True
 
-service = Service(DRIVER_EXECUTABLE_PATH)
-driver = webdriver.Chrome(service=service, options=options)
+    service = Service(DRIVER_EXECUTABLE_PATH)
+    driver = webdriver.Chrome(service=service, options=options)
 
-df = pd.read_csv("jacksonville.csv")
-with open("error2.txt", "a") as error_file, open("error.txt", "r") as failed:
-    street = failed.readlines()
+    month = date.today().month
+    if on_sale:
+        output_csv = "jacksonville_owners_info.csv"
+        zillow_data = f"zillow_onsale_{month}.csv"
+    else:
+        output_csv = "recently_sold_owners.csv"
+        zillow_data = f"zillow_sold_{month}.csv"
 
-    for street_address in street[235:]:
-        street_address = street_address.strip("\n")
-        street_no = street_address.split()[0]
-        zip = street_address.split()[-1]
-        street_name = " ".join(street_address.split()[1:-1])
+    df = pd.read_csv(zillow_data)
+
+    for street_add, zip, _, _ in df.values:
+
+        street_no = street_add.split()[0]
+        street_name = " ".join(street_add.split()[1:-1])
 
         street_name = (
             street_name.lower()
@@ -205,46 +217,47 @@ with open("error2.txt", "a") as error_file, open("error.txt", "r") as failed:
             .replace(" ave", "")
             .strip()
         )
-        street_split_1 = street_name.split()
-        street_split = []
+        street_name_words = street_name.split()
+        street_name_words_list = []
 
-        if len(street_split_1) > 1:
+        if len(street_name_words) > 1:
+            for word in street_name_words:
+                word = word.lower().strip()
 
-            for elem in street_split_1:
-                elem = elem.lower().strip()
-                if elem == "n" or elem == "w" or elem == "s" or elem == "e":
-                    direction = elem
-                    elem = ""
-
+                # check if word is a direction
+                if word == "n" or word == "w" or word == "s" or word == "e":
+                    direction = word
+                    word = ""
                 else:
                     direction = ""
 
-                if elem.startswith("#"):
-                    elem = ""
+                # replace words that may interfer with search
+                if word.startswith("#"):
+                    word = ""
 
-                if elem.isnumeric():
-                    elem = ""
-                street_split.append(elem)
+                if word.isnumeric():
+                    word = ""
+                street_name_words_list.append(word)
 
-            street_name = " ".join(street_split)
+            street_name = " ".join(street_name_words_list)
         else:
             direction = ""
 
         if len(street_name.split()) >= 2 and len(street_name.split()[-1]) <= 3:
             street_name = " ".join(street_name.split()[:-1])
-        print("-----------------------")
-        print(street_no)
-        print(street_name)
-        print(direction)
-        print(zip)
-        print("------------------------")
+        print("----------------------------------")
+        print("    Getting Owners Information    ")
+        print(f"Street Number: {street_no}")
+        print(f"Street Name: {street_name.title()}")
+        print(f"Direction: {direction.upper()}")
+        print(f"Zip: {zip}")
+        print("---------------------------------")
+
         try:
-            get_property_info(
-                "info.csv", error_file, street_no, street_name, zip, direction
-            )
-        except:
-            error_file.write(
-                " ".join((str(street_no), direction, street_name, str(zip)))
-            )
-            error_file.write("\n")
-            continue
+            get_property_info(output_csv, street_no, street_name, zip, direction)
+        except exception as e:
+            print(e)
+            with open(ERROR_FILE, "a") as error_file:
+                error_file.write(",".join((str(street_no), street_name, str(zip))))
+                error_file.write("\n")
+                continue

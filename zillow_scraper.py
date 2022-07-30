@@ -17,12 +17,32 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.action_chains import ActionChains
 from concurrent.futures import ThreadPoolExecutor
 from selenium.webdriver.common.keys import Keys
+from datetime import date
 
 DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
 
 
-def generate_api_url(page_num, for_sale=True):
+def generate_api_url(page_num, on_sale=True):
     # API parameter <searchQueryState>
+    if on_sale:
+        filter_state = {
+            "isAllHomes": {"value": True},
+            "hasPool": {"value": True},
+            "sortSelection": {"value": "globalrelevanceex"},
+        }
+    else:
+        filter_state = {
+            "sort": {"value": "globalrelevanceex"},
+            "ah": {"value": True},
+            "pool": {"value": True},
+            "rs": {"value": True},
+            "fsba": {"value": False},
+            "fsbo": {"value": False},
+            "nc": {"value": False},
+            "cmsn": {"value": False},
+            "auc": {"value": False},
+            "fore": {"value": False},
+        }
     search_query = {
         "pagination": {"currentPage": page_num},
         "usersSearchTerm": "Jacksonville, FL",
@@ -34,11 +54,7 @@ def generate_api_url(page_num, for_sale=True):
         },
         "regionSelection": [{"regionId": 25290, "regionType": 6}],
         "isMapVisible": True,
-        "filterState": {
-            "isAllHomes": {"value": True},
-            "hasPool": {"value": True},
-            "sortSelection": {"value": "globalrelevanceex"},
-        },
+        "filterState": filter_state,
         "isListVisible": True,
         "mapZoom": 9,
     }
@@ -64,16 +80,20 @@ def parse_api(api_json):
 
     parsed_data = []
     for listing in listings:
-        id = listing.get("id")
         street_address = listing.get("addressStreet")
         zip_code = listing.get("addressZipcode")
         city = listing.get("addressCity")
         state = listing.get("addressState")
-        parsed_data.append(",".join((id, street_address, zip_code, city, state)))
+        parsed_data.append(",".join((street_address, zip_code, city, state)))
     return parsed_data
 
 
-def scrape_zillow(for_sale=True, filename="zillow.csv"):
+def scrape_zillow(on_sale=True):
+    month = date.today().month
+    if on_sale:
+        filename = f"zillow_onsale_{month}.csv"
+    else:
+        filename = f"zillow_sold_{month}.csv"
 
     # create browser
     service = Service(DRIVER_EXECUTABLE_PATH)
@@ -86,24 +106,30 @@ def scrape_zillow(for_sale=True, filename="zillow.csv"):
         if page == 6:
             break
         print(f">>> Parsing page {page}")
-        api_url = generate_api_url(page)
+        api_url = generate_api_url(page, on_sale)
         driver.get(api_url)
-        api_response = json.loads(driver.find_element_by_tag_name("body").text)
+        api_response = json.loads(driver.find_element(by=By.XPATH, value="//body").text)
         parsed_data = parse_api(api_response)
 
+        # write data to csv
+        write_headers = not os.path.exists(filename)
         with open(filename, "a") as file:
+            if write_headers:
+                file.write(",".join(("street_address", "zip_code", "city", "state")))
+                file.write("\n")
+
             file.write("\n".join(parsed_data))
             file.write("\n")
 
         page += 1
 
+    df = pd.read_csv(filename)
+    df.drop_duplicates(inplace=True, keep="first")
+    df.to_csv(filename, index=None)
+
     driver.quit()
 
 
-scrape_zillow()
+if __name__ == "__main__":
 
-
-#
-# semd request
-# parse response
-# check date limit
+    scrape_zillow()
