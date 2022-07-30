@@ -1,3 +1,5 @@
+from urllib.parse import urlencode
+import requests, json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,123 +16,94 @@ from scrapy.selector import Selector
 import undetected_chromedriver as uc
 from selenium.webdriver.common.action_chains import ActionChains
 from concurrent.futures import ThreadPoolExecutor
+from selenium.webdriver.common.keys import Keys
 
-
-logging.basicConfig(level=logging.INFO)
 DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
 
-service = Service(DRIVER_EXECUTABLE_PATH)
 
-API_KEY = "3bd81392dadcc3f492720c4cbebd6a4f"
+def generate_api_url(page_num, for_sale=True):
+    # API parameter <searchQueryState>
+    search_query = {
+        "pagination": {"currentPage": page_num},
+        "usersSearchTerm": "Jacksonville, FL",
+        "mapBounds": {
+            "west": -82.8919559296875,
+            "east": -80.4859500703125,
+            "south": 29.090635517057596,
+            "north": 31.57937245240447,
+        },
+        "regionSelection": [{"regionId": 25290, "regionType": 6}],
+        "isMapVisible": True,
+        "filterState": {
+            "isAllHomes": {"value": True},
+            "hasPool": {"value": True},
+            "sortSelection": {"value": "globalrelevanceex"},
+        },
+        "isListVisible": True,
+        "mapZoom": 9,
+    }
 
-options = Options()
-options.add_argument("--user-data-dir=/home/atehe/.config/google-chrome")
-options.add_argument("--profile-directory=Profile 3")  # Path to your chrome profile
+    # API parameter <wants>
+    wants = {
+        "cat1": ["listResults", "mapResults"],
+        "cat2": ["total"],
+        "regionResults": ["total"],
+    }
 
-# proxy_options = {
-#     "proxy": {
-#         "http": f"http://scraperapi:{API_KEY}@proxy-server.scraperapi.com:8001",
-#         "no_proxy": "localhost,127.0.0.1",
-#     }
-# }
-# seleniumwire_options=proxy_options
-driver = webdriver.Chrome(service=service, options=options)
+    params = {"searchQueryState": search_query, "wants": wants}
+    encoded_params = urlencode(params)
 
-
-def click(element, driver):
-    """Use javascript click if selenium click method fails"""
-    try:
-        element.click()
-    except:
-        driver.execute_script("arguments[0].click();", element)
-    time.sleep(1.5)
+    api_url = f"https://www.zillow.com/search/GetSearchPageState.htm?{encoded_params}"
+    return api_url
 
 
-def scroll_to_element(driver, house_element):
-    action = ActionChains(driver)
-    action.move_to_element(to_element=house_element)
-    action.perform()
-    # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+def parse_api(api_json):
+    search_result = api_json.get("cat1", {}).get("searchResults", {})
+
+    listings = search_result.get("listResults", [])
+
+    parsed_data = []
+    for listing in listings:
+        id = listing.get("id")
+        street_address = listing.get("addressStreet")
+        zip_code = listing.get("addressZipcode")
+        city = listing.get("addressCity")
+        state = listing.get("addressState")
+        parsed_data.append(",".join((id, street_address, zip_code, city, state)))
+    return parsed_data
 
 
-def load_all_elements(driver):
-    print("loading")
-    house_elements = driver.find_elements(
-        by=By.XPATH, value="//ul[contains(@class,'photo-cards')]/li"
+def scrape_zillow(for_sale=True, filename="zillow.csv"):
+
+    # create browser
+    service = Service(DRIVER_EXECUTABLE_PATH)
+    driver = webdriver.Chrome(
+        service=service,
     )
-    for i in range(40):
 
-        try:
-            scroll_to_element(driver, house_elements[i])
-            if i % 5 == 0:
-                time.sleep(0.2)
-                print("scrolling...")
-            house_elements = driver.find_elements(
-                by=By.XPATH,
-                value="//ul[contains(@class,'photo-cards')]/li",
-            )
-            print(len(house_elements))
-        except Exception as e:
-            print(e)
-            print(i)
+    page = 1
+    while True:
+        if page == 6:
             break
+        print(f">>> Parsing page {page}")
+        api_url = generate_api_url(page)
+        driver.get(api_url)
+        api_response = json.loads(driver.find_element_by_tag_name("body").text)
+        parsed_data = parse_api(api_response)
+
+        with open(filename, "a") as file:
+            file.write("\n".join(parsed_data))
+            file.write("\n")
+
+        page += 1
+
+    driver.quit()
 
 
-def parse_page(driver):
-
-    # load_all_elements(driver)
-    print("loading all")
-    time.sleep(3)
-
-    with open("house.csv", "a") as csv_file:
-        csv_writer = writer(csv_file)
-        if os.stat("house.csv").st_size == 0:
-            csv_writer.writerow(("house_url", "address", "features", "price"))
-        response = Selector(text=driver.page_source.encode("utf8"))
-
-        houses = response.xpath("//ul[contains(@class,'photo-cards')]/li")
-
-        for i, house in enumerate(houses):
-
-            house_url = house.xpath(".//div[@class='list-card-info']/a/@href").get()
-            address = house.xpath(
-                ".//div[@class='list-card-info']/a/address/text()"
-            ).get()
-            price = house.xpath(".//div[@class='list-card-price']/text()").get()
-            features = " ".join(
-                house.xpath(".//ul[@class='list-card-details']/li//text()").getall()[
-                    :-1
-                ]
-            )
-
-            csv_writer.writerow((house_url, address, features, price))
+scrape_zillow()
 
 
-def navigate_pages(driver):
-
-    try:
-        next_page = driver.find_element(
-            by=By.XPATH, value='//a[@title="Next page" and not(@tabindex=-1)]'
-        )
-    except:
-        next_page = None
-
-    while next_page:
-        print("click next_page")
-        time.sleep(3)
-
-        # scroll_to_element(driver, next_page)
-        # click(next_page, driver)
-        parse_page(driver)
-
-
-def scrape_zillow(url):
-    driver.get(url)
-    parse_page(driver)
-    navigate_pages(driver)
-
-
-zillow_sold_url = 'https://www.zillow.com/jacksonville-fl-postal_code/sold/?searchQueryState={"pagination":{},"usersSearchTerm":"postal_code","mapZoom":12,"isMapVisible":true,"filterState":{"pool":{"value":true},"sort":{"value":"globalrelevanceex"},"rs":{"value":true},"fsba":{"value":false},"fsbo":{"value":false},"nc":{"value":false},"cmsn":{"value":false},"auc":{"value":false},"fore":{"value":false}},"isListVisible":true}'
-
-url = zillow_sold_url.replace("postal_code", "32218")
-scrape_zillow(url)
+#
+# semd request
+# parse response
+# check date limit
