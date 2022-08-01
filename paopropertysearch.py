@@ -22,10 +22,6 @@ NO_RESULT_FILE = "no_result.csv"
 
 options = Options()
 # options.add_argument("--headless")
-# options.add_argument(
-#     f"user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"
-# )
-# options.add_argument("--window-size=1920,1080")
 # options.add_argument("--ignore-certificate-errors")
 # options.add_argument("--allow-running-insecure-content")
 
@@ -98,9 +94,13 @@ def parse_result(output_csv, main_page, street_num, street_name, zip_code):
     page_response = Selector(text=driver.page_source.encode("utf8"))
 
     no_result = page_response.xpath('//div[@id="noResults"]')
+
     if no_result:
         print("*** Found no Owner Information ***")
+        no_result_header = not os.path.exists(NO_RESULT_FILE)
         with open(NO_RESULT_FILE, "a") as no_result_file:
+            if no_result_header:
+                no_result_file.write("street_no,street_name,zipcode\n")
             no_result_file.write(
                 ",".join((str(street_num), street_name, str(zip_code)))
             )
@@ -181,23 +181,21 @@ def get_property_info(
     parse_result(output_csv, main_page, street_num, street_name, zip_code)
 
 
-if __name__ == "__main__":
-    on_sale = True
-
+def main(on_sale=True):
     service = Service(DRIVER_EXECUTABLE_PATH)
     driver = webdriver.Chrome(service=service, options=options)
 
     month = date.today().month
     if on_sale:
-        output_csv = "jacksonville_owners_info.csv"
+        output_csv = f"jacksonville_owners_info_{month}.csv"
         zillow_data = f"zillow_onsale_{month}.csv"
     else:
-        output_csv = "recently_sold_owners.csv"
+        output_csv = f"recently_sold_owners_{month}.csv"
         zillow_data = f"zillow_sold_{month}.csv"
 
     df = pd.read_csv(zillow_data)
 
-    for street_add, zip, _, _ in df.values:
+    for street_add, zip, _, _ in df.values[::-1]:
 
         street_no = street_add.split()[0]
         street_name = " ".join(street_add.split()[1:-1])
@@ -255,9 +253,21 @@ if __name__ == "__main__":
 
         try:
             get_property_info(output_csv, street_no, street_name, zip, direction)
-        except exception as e:
+        except Exception as e:
             print(e)
+            error_header = not os.path.exists(ERROR_FILE)
             with open(ERROR_FILE, "a") as error_file:
+                if error_header:
+                    error_file.write("street_no,street_name,zipcode\n")
                 error_file.write(",".join((str(street_no), street_name, str(zip))))
                 error_file.write("\n")
                 continue
+    driver.quit()
+
+
+
+if __name__ == "__main__":
+    main()
+    main(False)
+
+    

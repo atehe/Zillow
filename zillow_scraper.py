@@ -20,6 +20,10 @@ from selenium.webdriver.common.keys import Keys
 from datetime import date
 
 DRIVER_EXECUTABLE_PATH = "./utils/chromedriver"
+options = Options()
+options.add_argument("--headless")
+options.add_argument("--ignore-certificate-errors")
+options.add_argument("--allow-running-insecure-content")
 
 
 def generate_api_url(page_num, on_sale):
@@ -114,9 +118,7 @@ def scrape_zillow(on_sale=True):
 
     # create browser
     service = Service(DRIVER_EXECUTABLE_PATH)
-    driver = webdriver.Chrome(
-        service=service,
-    )
+    driver = webdriver.Chrome(service=service, options=options)
 
     page = 1
     while True:
@@ -151,5 +153,11 @@ def scrape_zillow(on_sale=True):
 
 
 if __name__ == "__main__":
-    scrape_zillow(False)
-    scrape_zillow()
+    # scrape_zillow(False)
+    # scrape_zillow()
+
+    response = requests.get("https://www.lowes.com/c/Appliances")
+    with open("ANS.html", "a") as html_file:
+        html_file.write(str(response.text))
+
+    print(response.status_code)
